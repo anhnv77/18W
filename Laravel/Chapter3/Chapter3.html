@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laravel</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+
+
+    <script src="/bootstrap/jquery.min.js"></script>
+
+
+    <script src="/bootstrap/bootstrap.min.js"></script>
+</head>
+<style>
+    .header{
+        text-align: center;
+    }
+    .box{
+        border: 1px solid black;
+
+        padding: 1px 250px 1px 250px;
+    }
+    img{
+        margin-top: 30px;
+        width: 100%;
+        text-align: center;
+    }
+
+</style>
+<body>
+    <div class="box">
+        <div class="header">
+            <h2> Model View Controller </h2>
+        </div>
+        <div>
+            <section>
+                <h3><b>MVC trong Laravel Framework</b></h3>
+                <hr>
+                <h4><b>Giới thiệu về MVC</b></h4>
+
+                <div>
+                    <img src="mvcp.png" alt="mvc">
+                </div>
+                <p>Điều đầu tiên nói đến đó chính là mô hình MVC, đây là mô hình phổ biến mà hầu hết các framework đều sử dụng, ngoài ra chúng ta còn có thể nhắc đến CodeIgniter, sử dụng MVC - một mô hình nâng cấp từ MVC</p>
+                <h4><b>MVC là mô hình 3 lớp với ba thành phần chính:</b></h4>
+                <ul>
+                    <li>
+                        Model là nơi chưa các nghiệp vụ logic, các phương thức thức xử lý, tuy nhiên đa phần model là nơi chúng ta sử dụng để truy xuất database
+                    </li>
+                    <li>
+                        View là hiển thị các giao diện của website dựa vào hành động của người dùng, là chính các file HTML của chúng ta. Trong Laravel cũng có một thư mục view riêng.
+                    </li>
+                    <li>
+                        Controller chính là nơi nhận request của người dùng, từ đó có thể gửi lệnh cho Model hoặc View tùy vào request của người dùng
+                    </li>
+
+                </ul>
+                <div>
+                    <section>
+                        <p>
+                            Có thể hiểu dễ hơn, Controller chính là nơi nhận lệnh từ người dùng, nếu người dùng thực hiện yêu cầu phải truy xuất xuống database, khi đó Controller sẽ gửi lệnh xuống Model, Model thực hiện yêu cầu của Controller sau đó lại ngược lại Controller, Controller nhận được dữ liệu và chuyển về View, từ đó View sẽ gửi thông tin dạng giao diện cho người dùng. Ngoài ra nếu yêu cầu không liên quan tới database thì Controller sẽ chuyển hướng thẳng về view mà không cần gửi lệnh cho Model.
+
+                            MVC giúp cho chúng ta quản lý mã nguồn dễ hơn, dễ nâng cấp và bảo trì source code của mình, tạo ra một chuẩn giúp cho teamwork tốt hơn, thống nhất trên một khuân khổ, tránh tình trạng "râu ông này cắm cằm bà kia" khi nhiều người code một project, và nhiều hơn thế nữa
+                        </p>
+                    </section>
+                </div>
+            </section>
+            <hr>
+            <p><b>MVC trong Laravel Framework</b></p>
+            <section>
+                Về cơ bản, Laravel đã cung cấp cho ta một mô hình MVC quá tuyệt vời, chúng ta không phải làm quá nhiều việc khi chúng ta code "PHP thuần" nữa. Với các thành phần trong mô hình MVC được đặt rất rõ ràng và người dùng dễ dàng thao tác với mô hình MVC.
+                <div>
+                    <img src="mvc.png" alt="mvc laravel">
+                </div>
+                <div>
+                    <p><b>Trong Laravel, chúng ta hãy chú ý tới những thư mục được Laravel tạo sẵn, nơi mà chúng ta sẽ thực hiện đúng mô hình MVC.</b></p>
+                    <ul>
+                        <li>Thư mục <mark>resources</mark>: Đây là thư mục nơi mà chúng ta chứa các file giao diện, cụ thể là sẽ nằm trong thư mục view, Laravel cung cấp cho chúng ta thao tác gọi view rất đơn giản, nó được mặc định trong Laravel nên chúng ta không cần phải cấu hình một đường dẫn link tới thư mục này. Ngoài ra còn có các thư mục khác dùng để upload file, hoặc chứa thông tin giao diện đa ngôn ngữ và nơi chưa các file Front-end (tuy nhiên đa phần chúng ta đều để các file Front-end tại thư mục Public)
+                            <div>
+                                <img src="1.png" alt="1" style="width: 80%">
+                                <img src="3.png" alt="3" style="width: 80%">
+                            </div>
+                        </li>
+                        <li>
+                            <p>Thư mục <mark>public</mark>: đây là thư mục đúng nghĩa như cái tên của nó, public là nơi ta chứa các file cần thiết, chả hạn như đối với mình thì đây là nơi mình sử dụng để chứa các file CSS, JS, và một số hình ảnh upload được mình lưu tại đây.</p>
+                            <div>
+                                <img src="4.png" alt="4" style="width: 80%">
+
+                            </div>
+                        </li>
+                        <li>
+
+                            <p>Thư mục <mark>app</mark> - nơi chưa đựng những gì tinh tuý nhất trong Laravel: quả thật vậy, đây chính là nơi nòng cốt của cả trang web, trong thư mục này, chúng chứa toàn bộ những những xử lý của chúng ta thông qua Http\Controller cũng như chứa các file Model giúp chúng ta thao tác cơ sở dữ liệu. Ngoài ra nó còn chứa các file Request - nơi chúng ta có thể sử dụng Validation mà Laravel cung cấp sẵn cũng như middleware giúp chúng ta thiết lập Authentication cho ứng dụng.</p>
+                            <div>
+                                <img src="7.png" alt="1" style="width: 80%">
+                                <img src="8.png" alt="3" style="width: 80%">
+                            </div>
+                        </li>
+
+
+                        
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter 3</title>
+</head>
+<style>
+    .box{
+        padding: 1px 200px 1px 200px;
+        border: 1px solid black;
+    }
+    .head{
+        text-align: center;
+    }
+    h3{
+        color: red;
+    }
+    .example{
+
+        background-color: #adadad;
+        margin-top: 10px;
+        padding: 2px;
+
+
+
+
+    }
+</style>
+<body>
+    <div class="box">
+        <div class="head">
+            <h1><b>Routing And Controllers</b></h1>
+        </div>
+        <div class="main">
+            <ol type="I">
+                <li>
+                    <div class="routing">
+                        <h2>Routing</h2>
+                        <div class="pos">
+                             <h3>Vị trí mặc định của file route</h3>
+                             <section>
+                                 Các định tuyến được định nghĩa trong <mark>app/routes.php</mark>.
+                                 <br>
+                                 <br>
+                                 Ở bản Laravel 5.3 thì phần Routing được tách hẳn ra một thư mục riêng là routes với 2 file là <mark>routes/web.php</mark> để định nghĩa các route cho web và <mark>routes/api.php</mark> để định nghĩa các route cho api.
+
+                             </section>
+                        </div>
+                        <div class="methods">
+                            <h3>Các phương thức trong route</h3>
+
+                            <h4>Các phương thức route hỗ trợ gồm có : </h4>
+                            <div class="example">
+                                 <p>Route <span style="color: #1b6d85">get</span>::($uri, $callback);</p>
+                                 <p>Route <span style="color: #1b6d85">post</span>::($uri, $callback);</p>
+                                 <p>Route <span style="color: #1b6d85">put</span>::($uri, $callback);</p>
+                                 <p>Route <span style="color: #1b6d85">patch</span>::($uri, $callback);</p>
+                                 <p>Route <span style="color: #1b6d85">delete</span>::($uri, $callback);</p>
+                                 <p>Route <span style="color: #1b6d85">options</span>::($uri, $callback);</p>
+
+                            </div>
+                            <br>
+                            <p>
+                                Ngoài ra, laravel cũng hỗ trợ ta định nghĩa một route mà có thể xử lý nhiều loại method với chung một response bằng cách sử dụng phương thức <mark>match</mark> và <mark>any</mark>
+                            </p>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">match</span>::( ['get','post'], '/', <span style="color: red">function</span>(){)</p>
+                                <p>something</p>
+
+                                <p>});</p>
+                                <br>
+                                <p>Route <span style="color: #1b6d85">any</span>::('foo', <span style="color: red">function</span>(){)</p>
+                                <p>something</p>
+
+                                <p>});</p>
+                            </div>
+
+                        </div>
+                        <div class="Parameters">
+                            <h3>Route Parameters</h3>
+                            <h4>Ví dụ để lấy một Id của User trong URL ta sẽ định nghĩa route như sau:</h4>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">match</span>::( 'user/{$id}', '/', <span style="color: red">function</span>($id){)</p>
+                                <p>return $id ;</p>
+
+                                <p>});</p>
+
+                            </div>
+                            <h4>Ngoài ra ta cũng có thể có nhiều parameter ví dụ như:</h4>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">match</span>::( 'user/{$id}/{$demo}', '/', <span style="color: red">function</span>($id,$demo){)</p>
+                                //
+
+                                <p>});</p>
+
+                            </div>
+                        </div>
+                        <div class="name">
+                            <h4>Đặt tên cho các Route: </h4>
+                            <p>
+                                Để đặt tên một route ta sử dụng phương thức <mark>name</mark>
+                            </p>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">get</span>::( 'user/{$id}','Mycontroller@getId')<span>->('name')</span></p>
+
+                            </div>
+                        </div>
+                        <div class="group">
+                            <h3>Nhóm Route  </h3>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">group</span>::(['namespace' => 'mGroup' ] , '/', <span style="color: red">function</span>{)</p>
+                                <p>Route <span style="color: #1b6d85">get</span>::('foo', <span style="color: red">function</span>(){)</p>
+                                <p>something</p>
+
+                                <p>});</p>
+                                <p>Route <span style="color: #1b6d85">get</span>::('/', <span style="color: red">function</span>(){)</p>
+                                <p>something</p>
+
+                                <p>});</p>
+                                <p>});</p>
+
+                            </div>
+                        </div>
+                        <div class="Namespace">
+                            <h3>Namespaces</h3>
+                            <h4>Namespace trong Laravel giông như PHP namespace được chỉ định với một nhóm controller.</h4>
+                            <div class="example">
+
+                                <p>Route <span style="color: #1b6d85">group</span>::(['namespace' => 'mGroup' ], <span style="color: red">function</span>{)</p>
+
+
+                                <p>});</p>
+                            </div>
+                        </div>
+
+                        <div class="prefix">
+                            <h3>Prefix</h3>
+                            <h4>Xét ví dụ : </h4>
+                            <div class="example">
+
+                                <p>Route <span style="color: #1b6d85">get</span>::('admin/posts', 'PostController@index') ;</p>
+                                <p>Route <span style="color: #1b6d85">get</span>::('admin/posts/create', 'PostController@create') ;</p>
+                                <p>Route <span style="color: #1b6d85">post</span>::('admin/posts/store', 'PostController@store') ;</p>
+
+
+                            </div>
+                            <p>
+
+                                Ta  có thấy đặc điểm chung của các route trên, nó đều bắt đầu bằng <mark>admin</mark> vì thể để viết gọn lại các URL thì chúng ta sẽ sử dụng <mark>prefix</mark> để URL khi định nghĩa route ngắn gọn dễ nhìn hơn.
+                            </p>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">group</span>::(['prefix' => 'admin' ], <span style="color: red">function</span>{)</p>
+
+                                <p>Route <span style="color: #1b6d85">get</span>::('posts', 'PostController@index') ;</p>
+                                <p>Route <span style="color: #1b6d85">get</span>::('posts/create', 'PostController@create') ;</p>
+                                <p>Route <span style="color: #1b6d85">post</span>::('posts/store', 'PostController@store') ;</p>
+
+                                <p>} );</p>
+
+                            </div>
+
+                        </div>
+                        <div class="regular">
+                            <h3>Regular Expression Constraints</h3>
+                            <h4>Bạn có thể hạn chế định dạng của các tham số route của bạn bằng cách sử dụng phương thức <mark>where</mark> trên một thể hiện route. Phương thức <mark>where</mark> chấp nhận tên của tham số và một biểu thức chính quy định nghĩa tham số nên bị hạn chế như thế nào:
+                            </h4>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">get</span>::('user/{ $name }', <span style="color: red">function</span>( $name ){)</p>
+
+                                <p>})-><span style="color: #3c763d">where</span>('name','[A-Za-z]+');</p>
+
+                                <p>Route <span style="color: #1b6d85">get</span>::('user/{ $id }', <span style="color: red">function</span>( $id ){)</p>
+
+                                <p>})-><span style="color: #3c763d">where</span>('id','[0-9]+');</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </li>
+                <li>
+                    <div class="controller">
+                         <h2>Controllers</h2>
+                         <div class="create">
+                             <h3>Tạo controller</h3>
+                             <ul>
+                                 <li>Controller phải được đặt trong đường dẫn <mark>App\Http\controllers</mark></li>
+                                 <li>Tên của controller phải giống với tên class trong file controller đó.</li>
+                                 <li>Class controller (do bạn tạo) phải extends(kế thừa) từ Controller (chú ý chữ C phải viết hoa).</li>
+                             </ul>
+                             <div class="c1">
+                                 <h4>Cách 1</h4>
+                                 <p>Chúng ta có thể tạo một file controller bằng tay hoặc bằng cmd thuần trong đường dẫn <mark>App\Http\Controllers</mark>. Và để sử dụng được controller đó thì bắt buộc các bạn phải tuân thủ 3 điều kiện phía trên nhé.</p>
+                                 <p>Ví dụ:tạo một <mark>homecontroller.php</mark> trong <mark>App\Http\Controllers</mark> thì trong file sẽ có nội dung như sau:</p>
+                                 <div class="example">
+
+                                     <p><span style="color: #985f0d">namespace</span> <span style="color: #1b6d85">App\Http\Controllers;</span></p>
+                                     <p><span style="color: #985f0d">class</span> <span style="color: #1b6d85">homecontroller</span> <span style="color: #985f0d"></span> <span style="color: #1b6d85">Controller</span>{</p>
+                                     <br>
+
+                                     <p>}</p>
+                                 </div>
+
+                             </div>
+                             <div class="c2">
+                                 <h4>Cách 2:Tạo bằng lệnh laravel cung cấp sẵn</h4>
+                                 <div class="example">
+                                     <p style="color:#1b6d85;">php artisan make:controller controllername</p>
+                                 </div>
+                                 <p>Hoặc</p>
+                                 <div class="example">
+                                     <p style="color: #1b6d85">php artisan make:controller controllername --resource</p>
+                                 </div>
+                                 <br>
+
+                                 <i><span style="color: #1b6d85">controllermame</span> là tên muốn tạo</i>
+                             </div>
+
+                         </div>
+                        <div class="action">
+                            <h3>Sử dụng dụng các action trong Controllers</h3>
+                            <p>Để tạo một action trong controllers thì chúng ta chỉ việc tạo một hàm ở trong controllers và gọi nó ở trong Route là được</p>
+                            <div class="example">
+                                <p><span style="color: #985f0d">namespace</span> <span style="color: #1b6d85">App\Http\Controllers;</span></p>
+                                <p><span style="color: #985f0d">class</span> <span style="color: #1b6d85">homecontroller</span> <span style="color: #985f0d"></span> <span style="color: #1b6d85">Controller</span>{</p>
+
+                                <p>public <span style="color: red">function</span> index(){</p>
+                                <p>echo "Hello";</p>
+                                <p>}</p>
+
+                                <p>}</p>
+
+                            </div>
+                            <br>
+                            <h4>Để gọi đến action đó : </h4>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">get</span>::('hello','homecontroller@index');</p>
+
+                            </div>
+                        </div>
+                        <div class="action">
+                            <h3>Truyền tham số trong action Controllers</h3>
+                            <h4>Để truyền tham số trong action Controllers thì nó hoàn toàn giống PHP thuần</h4>
+                            <div class="example">
+                                <p><span style="color: #985f0d">namespace</span> <span style="color: #1b6d85">App\Http\Controllers;</span></p>
+                                <p><span style="color: #985f0d">class</span> <span style="color: #1b6d85">homecontroller</span> <span style="color: #985f0d"></span> <span style="color: #1b6d85">Controller</span>{</p>
+
+                                <p>public <span style="color: red">function</span> index($name){</p>
+                                <p>echo "Hello $name";</p>
+                                <p>}</p>
+
+                                <p>}</p>
+
+                            </div>
+                            <h4>Để gọi đến action đó : </h4>
+                            <div class="example">
+                                <p>Route <span style="color: #1b6d85">get</span>::('helloname/{$name}','homecontroller@index')-><span style="color: #122b40">where</span>(['name'=>'A-Za-z'+]);</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+<script>
+
+
+</script>
+</html>
